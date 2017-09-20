@@ -1,0 +1,8 @@
+{
+    "name": "dynamic_menu_icon",
+    "version": "1.0.0",
+    "keywords": ["util", "functional", "server", "client", "browser"],
+    "author": "Wojtas",
+    "contributors": [],
+    "dependencies": {}
+}

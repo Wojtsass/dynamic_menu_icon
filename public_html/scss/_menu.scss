@@ -1,0 +1,105 @@
+$size: "big"; // small|medium|big
+$shape: "rounded"; // rounded|oval|square
+$speed: "fast"; // slow|medium|fast
+
+$SIZE: (
+    "small": 35px, 
+    "medium": 45px, 
+    "big": 65px
+);
+
+$SHAPE: (
+    "square": 0px,
+    "rounded": ( map-get( $SIZE, $size ) / 5 ), 
+    "oval": ( map-get( $SIZE, $size ) )
+);
+
+$SPEED: (
+    "slow": ( all .6s, visiblity 1ms, transform .6s ), 
+    "medium": ( all .4s, visiblity 1ms, transform .4s ), 
+    "fast": ( all .2s, visiblity 1ms, transform .2s ) 
+);
+
+$DELAY: (
+    "slow": ( 0s, .6s, .6s ), 
+    "medium": ( .0s, .4s, .4s ), 
+    "fast": ( .0s, .2s, .2s ) 
+);
+
+$SPEED_REVERSE: (
+    "slow": ( all .6s, visiblity 1ms, transform .6s ), 
+    "medium": ( all .4s, visiblity 1ms, transform .4s ), 
+    "fast": ( all .2s, visiblity 1ms, transform .2s ) 
+);
+
+$DELAY_REVERSE: (
+    "slow": ( .6s, .6s, .0s ), 
+    "medium": ( .4s, .4s, .0s ), 
+    "fast": ( .2s, .2s, .0s ) 
+);
+
+$white: #fff;
+$blue: #81d4fa;
+$green: #69f0ae;
+$light_gray: #ccc;
+
+$bg1: $blue;
+$bg2: $green;
+$shadow: 2px 2px 2px $light_gray;
+
+$bar_color: $white;
+$bar_width: 60%;
+$bar_height: 9%;
+$bar_margin: 12.00%;
+$bar_radius: 1px;
+
+
+#menu_mobile {
+    @include transition( map-get( $SPEED, $speed ) );
+    @include border-radius( map-get( $SHAPE, $shape ) );
+    @include box-shadow( $shadow );
+    display: block;
+    position: fixed;
+    width: map-get( $SIZE, $size );
+    height: map-get( $SIZE, $size );
+    top: 25px;
+    right: 25px;
+    background: $bg1;
+    cursor: pointer;
+    
+    &:hover {
+        background: $bg2;
+        
+        .bar {
+            @include transition( map-get( $SPEED, $speed ) );
+            @include transition_delay( map-get( $DELAY, $speed ) );
+        }
+        
+        #bar1 { 
+            margin-top: calc( 37.5% - ( #{$bar_height} / 2 ) ); 
+            transform: rotate(45deg);
+        }
+        #bar2 { visibility: hidden; }
+        #bar3 { 
+            margin-top: calc( 37.5% - ( #{$bar_height} / 2 ) ); 
+            transform: rotate(-45deg);
+        }
+    }
+    
+    .bar {
+        @include transition( map-get( $SPEED_REVERSE, $speed ) );
+        @include transition_delay( map-get( $DELAY_REVERSE, $speed ) );
+        @include border-radius( $bar_radius );
+        display: block;
+        position: absolute;
+        width: $bar_width;
+        height: $bar_height;
+        left: 20%;
+        top: 12.5%;
+        background: $bar_color;
+    }
+    
+    #bar1 { margin-top: calc( #{$bar_margin} ); }
+    #bar2 { margin-top: calc( ( #{$bar_margin} * 2 )  + #{$bar_height} ); }
+    #bar3 { margin-top: calc( ( #{$bar_margin} * 3 )  + ( #{$bar_height} * 2 ) ); }
+}
